@@ -5,8 +5,10 @@ import { Header } from './site/Header'
 import { Body } from './site/Body'
 import { Footer } from './site/Footer'
 import { NewComponent } from './components/NewComponent'
+import { Button } from './components/Button'
 
 function App() {
+	//map
 	const students = [
 		{ id: 1, name: 'James', age: 8 },
 		{ id: 2, name: 'Robert', age: 18 },
@@ -26,13 +28,34 @@ function App() {
 		{ manufacturer: 'Mercedes', model: 'e63s' },
 		{ manufacturer: 'Audi', model: 'rs6' }
 	]
+	//-----------------------------------------------------------------------------------------------------
+	//button
 
+	const Button1Foo = (subscriber: string, age: number) => {
+		console.log(subscriber, age)
+	}
+
+	const Button2Foo = (subscriber: string) => {
+		console.log(subscriber)
+	}
+
+	const Button3Foo = () => {
+		console.log('Im stupid button')
+	}
 	return (
 		<div className='App'>
 			<Header title={'NEW HEADER'} />
 			<Body titleForBody={'NEW BODY'} />
 			<Footer titleForHeader={'NEW HEADER'} />
+			{/*map*/}
 			<NewComponent students={students} topCars={topCars} />
+			{/*button*/}
+			<Button
+				name={'MyYouTybeChanel-1'}
+				callBack={() => Button1Foo('Igor', 25)}
+			/>
+			<Button name={'MyYouTybeChanel-2'} callBack={() => Button2Foo('Ivan')} />
+			<Button name={'Stupid'} callBack={Button3Foo} />
 		</div>
 	)
 }
