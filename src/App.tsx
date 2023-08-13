@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { Header } from './site/Header'
@@ -6,6 +6,7 @@ import { Body } from './site/Body'
 import { Footer } from './site/Footer'
 import { NewComponent } from './components/NewComponent'
 import { Button } from './components/Button'
+import { UseState } from './components/UseState'
 
 function App() {
 	//map
@@ -42,6 +43,19 @@ function App() {
 	const Button3Foo = () => {
 		console.log('Im stupid button')
 	}
+	//-----------------------------------------------------------------------------------------------------
+	//useState
+	let [a, setA] = useState(1)
+
+	const onClickHandlerPlus = () => {
+		setA(++a)
+		console.log(a)
+	}
+
+	const onClickHandlerReset = () => {
+		setA(0)
+		console.log(a)
+	}
 	return (
 		<div className='App'>
 			<Header title={'NEW HEADER'} />
@@ -56,6 +70,11 @@ function App() {
 			/>
 			<Button name={'MyYouTybeChanel-2'} callBack={() => Button2Foo('Ivan')} />
 			<Button name={'Stupid'} callBack={Button3Foo} />
+			<UseState
+				initialState={a}
+				onClickHandlerPlus={onClickHandlerPlus}
+				onClickHandlerReset={onClickHandlerReset}
+			/>
 		</div>
 	)
 }
