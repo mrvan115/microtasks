@@ -7,6 +7,7 @@ import { Footer } from './site/Footer'
 import { NewComponent } from './components/NewComponent'
 import { Button } from './components/Button'
 import { UseState } from './components/UseState'
+import { FilterType, MethodFilter } from './components/MethodFilter'
 
 function App() {
 	//map
@@ -56,6 +57,36 @@ function App() {
 		setA(0)
 		console.log(a)
 	}
+	//-----------------------------------------------------------------------------------------------------
+	//filter
+	const [money, setMoney] = useState([
+		{ banknots: 'Dollars', value: 100, number: ' a1234567890' },
+		{ banknots: 'Dollars', value: 50, number: ' z1234567890' },
+		{ banknots: 'RUBLS', value: 100, number: ' w1234567890' },
+		{ banknots: 'Dollars', value: 100, number: ' e1234567890' },
+		{ banknots: 'Dollars', value: 50, number: ' c1234567890' },
+		{ banknots: 'RUBLS', value: 100, number: ' r1234567890' },
+		{ banknots: 'Dollars', value: 50, number: ' x1234567890' },
+		{ banknots: 'RUBLS', value: 50, number: ' v1234567890' }
+	])
+
+	const [filter, setFilter] = useState<FilterType>('all')
+
+	let currentMoney = money
+	if (filter === 'rubls') {
+		currentMoney = money.filter(
+			(filteredMoney) => filteredMoney.banknots === 'RUBLS'
+		)
+	}
+	if (filter === 'dollar') {
+		currentMoney = money.filter(
+			(filteredMoney) => filteredMoney.banknots === 'Dollars'
+		)
+	}
+	const onFilterHandler = (nameButton: FilterType) => {
+		setFilter(nameButton)
+	}
+
 	return (
 		<div className='App'>
 			<Header title={'NEW HEADER'} />
@@ -75,6 +106,7 @@ function App() {
 				onClickHandlerPlus={onClickHandlerPlus}
 				onClickHandlerReset={onClickHandlerReset}
 			/>
+			<MethodFilter money={currentMoney} onFilterHandler={onFilterHandler} />
 		</div>
 	)
 }
