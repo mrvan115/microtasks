@@ -8,6 +8,8 @@ import { NewComponent } from './components/NewComponent'
 import { Button } from './components/Button'
 import { UseState } from './components/UseState'
 import { FilterType, MethodFilter } from './components/MethodFilter'
+import { MessageType, UniversalInput } from './components/Input/UniversalInput'
+import { UniversalInput2 } from './components/Input/UniversalInput2'
 
 function App() {
 	//map
@@ -87,6 +89,20 @@ function App() {
 		setFilter(nameButton)
 	}
 
+	//-----------------------------------------------------------------------------------------------------
+	//input
+	const [message, setMessage] = useState<MessageType[]>([
+		{ message: 'message1' },
+		{ message: 'message2' },
+		{ message: 'message3' }
+	])
+
+	let [title, setTitle] = useState('')
+
+	const addMessage = (title: string) => {
+		let newMessage = { message: title }
+		setMessage([newMessage, ...message])
+	}
 	return (
 		<div className='App'>
 			<Header title={'NEW HEADER'} />
@@ -107,6 +123,13 @@ function App() {
 				onClickHandlerReset={onClickHandlerReset}
 			/>
 			<MethodFilter money={currentMoney} onFilterHandler={onFilterHandler} />
+			<UniversalInput message={message} addMessage={addMessage} />
+			<UniversalInput2
+				message={message}
+				addMessage={addMessage}
+				title={title}
+				setTitle={setTitle}
+			/>
 		</div>
 	)
 }
